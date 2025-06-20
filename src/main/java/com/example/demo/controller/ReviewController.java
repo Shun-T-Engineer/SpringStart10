@@ -9,12 +9,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.form.ReviewRegistForm;
-import com.example.demo.mock.RegistServiceMock;
 import com.example.demo.service.RegistService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class ReviewController {
 	
+	private final RegistService service;
+	
+//	@Autowired コンストラクタがひとつなので省略可能
+/*	@RequiredArgsConstructorで省略可能
+	public ReviewController(RegistService service) {  
+		this.service = service;
+	}*/
+
 	@GetMapping("/show-review-form")
 	public String showReviewForm(@ModelAttribute ReviewRegistForm form) {
 		return "regist-review";
@@ -44,7 +54,7 @@ public class ReviewController {
 		}
 		
 //		RegistService  service = new RegistServiceImple();
-		RegistService  service = new RegistServiceMock();
+//		RegistService  service = new RegistServiceMock();
 		String msg = service.regist();
 		
 		
